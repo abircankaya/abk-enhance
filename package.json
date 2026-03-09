@@ -1,6 +1,6 @@
 {
   "name": "abk-pixel-prompt-gate",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": false,
   "type": "module",
   "bin": {
@@ -37,7 +37,12 @@
     "start:stdio": "node src/index.mjs",
     "start:http": "node src/httpServer.mjs",
     "cli": "node src/cli.mjs",
-    "test": "node --test"
+    "test": "node --test",
+    "prepublishOnly": "npm test",
+    "publish:dry-run": "npm publish --dry-run"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "engines": {
     "node": ">=20"

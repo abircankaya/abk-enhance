@@ -51,7 +51,7 @@ function renderPreview(preview) {
 export function createPromptGateServer({ service }) {
   const server = new McpServer({
     name: "abk-pixel-prompt-gate",
-    version: "0.3.0"
+    version: "0.3.1"
   });
 
   server.registerTool(

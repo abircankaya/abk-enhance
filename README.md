@@ -77,7 +77,7 @@ npm install
 En pratik kurulum su:
 
 ```bash
-npx -y github:abircankaya/abk-pixel-prompt-gate#v0.3.0 install
+npx -y github:abircankaya/abk-pixel-prompt-gate#v0.3.1 install
 ```
 
 Bu komut sunlari yapar:
@@ -96,6 +96,27 @@ Kurulumdan sonra:
 Not:
 
 - Paket npm'e yayinlandiginda ayni akis `npx abk-pixel-prompt-gate install` olarak da kullanilabilir.
+
+## NPM yayini
+
+Paket artik npm yayini icin hazir:
+
+- `publishConfig.access=public`
+- `prepublishOnly` ile publish oncesi test zorlamasi
+- `npm run publish:dry-run` ile publish simulasyonu
+
+Yayinlamak icin:
+
+```bash
+npm login
+npm publish
+```
+
+Yayin sonrasi kurulum komutu:
+
+```bash
+npx abk-pixel-prompt-gate install
+```
 
 ## Hizli baslangic
 
