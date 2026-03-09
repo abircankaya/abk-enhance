@@ -1,5 +1,9 @@
+#!/usr/bin/env node
+
 import { startHttpServer } from "./httpServer.mjs";
+import { installPromptGate } from "./install.mjs";
 import { createPromptService } from "./serviceFactory.mjs";
+import { startStdioServer } from "./stdioServer.mjs";
 
 function parseArgs(argv) {
   const command = argv[0];
@@ -59,6 +63,8 @@ Kullanim:
   npm run cli -- reject --id <prompt-id> [--reason "..."]
   npm run cli -- show --id <prompt-id>
   npm run cli -- list [--limit 20] [--status draft|approved|rejected]
+  npm run cli -- install [--data-dir .codex-prompt-mcp] [--skip-agents]
+  npm run cli -- mcp-server
   npm run cli -- serve-http [--host 127.0.0.1] [--port 3334]
 `);
 }
@@ -154,6 +160,35 @@ async function main() {
       const port = flags.port ? Number(flags.port) : undefined;
       await startHttpServer({ host, port, service });
       console.log(`ABK Pixel Prompt Gate UI hazir: http://${host || "127.0.0.1"}:${port || 3334}`);
+      return;
+    }
+
+    case "install": {
+      const result = await installPromptGate({
+        cwd: process.cwd(),
+        dataDir: flags["data-dir"] ? String(flags["data-dir"]) : undefined,
+        serverName: flags.name ? String(flags.name) : undefined,
+        packageRef: flags["package-ref"] ? String(flags["package-ref"]) : undefined,
+        agentFile: flags["agent-file"] ? String(flags["agent-file"]) : undefined,
+        skipAgents: Boolean(flags["skip-agents"])
+      });
+
+      console.log(
+        JSON.stringify(
+          {
+            ok: true,
+            nextStep: "Bu repo icinde yeni bir Codex thread'i acin.",
+            ...result
+          },
+          null,
+          2
+        )
+      );
+      return;
+    }
+
+    case "mcp-server": {
+      await startStdioServer({ service });
       return;
     }
 

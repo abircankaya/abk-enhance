@@ -72,6 +72,31 @@ Gereksinim:
 npm install
 ```
 
+## Tek komut kurulum
+
+En pratik kurulum su:
+
+```bash
+npx -y github:abircankaya/abk-pixel-prompt-gate#v0.2.0 install
+```
+
+Bu komut sunlari yapar:
+
+- Codex'e `abk-pixel-prompt-gate` MCP kaydini ekler veya gunceller
+- mevcut repo icinde `AGENTS.md` dosyasina yonetilen bir prompt gate blogu ekler
+- veri dizinini `.codex-prompt-mcp` olarak hazirlar
+
+Kurulumdan sonra:
+
+1. bu repo icinde yeni bir Codex thread'i acin
+2. ham probleminizi normal sekilde yazin
+3. Codex once iyilestirilmis prompt taslagi gostersin
+4. siz onay verdikten sonra asil isleme gecsin
+
+Not:
+
+- Paket npm'e yayinlandiginda ayni akis `npx abk-pixel-prompt-gate install` olarak da kullanilabilir.
+
 ## Hizli baslangic
 
 ### 1. Stdio MCP
@@ -116,9 +141,15 @@ http://127.0.0.1:3334
 npm run cli -- draft --problem "Filtre degisince liste bosa dusuyor" --repo-area src/features/search --constraint "API kontratini degistirme"
 ```
 
-## Onerilen akış
+Kurulum yardimcisi:
 
-Ilk cevap gecikmesini azaltmak icin su akış onerilir:
+```bash
+npm run cli -- install
+```
+
+## Onerilen akis
+
+Ilk cevap gecikmesini azaltmak icin su akis onerilir:
 
 1. `preview_codex_prompt`
 2. kullanici duzeltmesi veya onayi
@@ -168,10 +199,12 @@ npm run cli -- approve --id <prompt-id> --prompt "..."
 npm run cli -- reject --id <prompt-id> --reason "..."
 npm run cli -- show --id <prompt-id>
 npm run cli -- list --limit 20
+npm run cli -- install [--data-dir .codex-prompt-mcp] [--skip-agents]
+npm run cli -- mcp-server
 npm run cli -- serve-http --host 127.0.0.1 --port 3334
 ```
 
-## Ornek agent kuralı
+## Ornek agent kurali
 
 ```text
 Kullanici bir bug, teknik sorun, review, refactor veya implementasyon talebi yazdiginda bunu dogrudan uygulamaya gecme.
