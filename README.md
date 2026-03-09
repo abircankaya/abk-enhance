@@ -77,7 +77,7 @@ npm install
 En pratik kurulum su:
 
 ```bash
-npx -y github:abircankaya/abk-pixel-prompt-gate#v0.2.0 install
+npx -y github:abircankaya/abk-pixel-prompt-gate#v0.3.0 install
 ```
 
 Bu komut sunlari yapar:
